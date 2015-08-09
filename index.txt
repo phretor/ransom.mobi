@@ -1,0 +1,93 @@
+Welcome to the first mobile ransomware detector.
+
+                     .-----.                                                  
+                   ,' -   - `.                                                
+           _ _____/  <q> <p>  \_____ _                                        
+          /_||   ||`-._____.-`||   ||-\                                       
+         / _||===||           ||===|| _\    I GOT AN ANDROID AND WHAT THE F**K
+        |- _||===||===========||===||- _|    IT'S NOT EVEN HUMAN-SHAPED       
+        \___||___||___________||___||___/                                     
+         \\|///   \_:_:_:_:_:_/   \\\|//                                      
+         |   _|    |_________|    |   _|                                      
+         |   _|   /( ======= )\   |   _|                                      
+         \\||//  /\ `-.___.-' /\  \\||//                                      
+          (o )  /_ '._______.' _\  ( o)                                       
+         /__/ \ |    _|   |_   _| / \__\                                      
+         ///\_/ |_   _|   |    _| \_/\\\                                      
+        ///\\_\ \    _/   \    _/ /_//\\\                                     
+        \\|//_/ ///|\\\   ///|\\\ \_\\|//                                     
+                \\\|///   \\\|///                                             
+                /-  _\\   //   _\                                     
+                |   _||   ||-  _|           I WAS HOPING FOR A TOY AND   
+              ,/\____||   || ___/\,          I ALL GOT WAS THIS STUPID PHONE  
+             /|\___`\,|   |,/'___/|\                                          
+             |||`.\\ \\   // //,'|||                                          
+             \\\\_//_//   \\_\\_//// LGB/fsc                                  
+
+
+HTTP JSON API
+-------------
+
+Requests are rate limited on a per-IP basis. POST requests may take long
+especially if dynamic analysis is required. Please, be gentle. GET request
+usually take a second or so, but please do not abuse.
+
+    - scan a new APK:
+
+        $ curl -F "file=@foo.apk" http://detect.ransom.mobi/scan
+
+    - scan a new APK with dynamic analysis (slow)
+
+        $ curl -H "X-Dynamic-Analysis: true" -F "file=@foo.apk" http://detect.ransom.mobi/scan
+
+    - fetch a scan by hash (MD5):
+
+        $ curl http://detect.ransom.mobi/fetch-scan?hash=1c0aae0d9020a9e0ca5b013d5e792468
+
+
+Example reports
+---------------
+
+    * Suspicious (not certainly goodware, but possibly not even scareware or ransomware):
+
+        - http://detect.ransom.mobi/fetch-scan?hash=39780965255168083534b596c9b28c4e3e99e85decc3ed1f091f11d92eb7159d
+
+    * Scareware:
+
+        - http://detect.ransom.mobi/fetch-scan?hash=c4940ca8851b0c1053179e9506599aafe6a13aa0d7f2905ec9f21accfe642544
+
+    * Ransomware:
+
+        - http://detect.ransom.mobi/fetch-scan?hash=30be0bbf397e0e3f54b5ca3b1f3774ebf6f5f41d2e1ac6d1854c6f8b3a3972ee
+
+Datasets
+--------
+We tested our system on the following datasets:
+
+   * Raw data (APKs):
+
+      - AndRadar -> androcrawl-dataset.sha256.7z @ ://dl.dropboxusercontent.com/u/215810/ransom.mobi/androcrawl-dataset.sha256.7z
+      - AndroTotal -> andrototal-dataset.sha256.7z @ https://dl.dropboxusercontent.com/u/215810/ransom.mobi/andrototal-dataset.sha256.7z
+      - Ransomware 1 -> ransomware-1-training-dataset.7z @ https://dl.dropboxusercontent.com/u/215810/ransom.mobi/ransomware-1-training-dataset.7z
+      - Ransomware 2 -> ransomware-2-testing-dataset.7z @ https://dl.dropboxusercontent.com/u/215810/ransom.mobi/ransomware-2-testing-dataset.7z
+
+   * Features (Weka ARFF):
+
+      - http://ransom.mobi/f/detector.7z
+
+    * Threatening sentences training set:
+
+      - English -> http:/ransom.mobi/d/en.7z
+      - Russian -> http:/ransom.mobi/d/ru.7z
+      - Spanish -> http:/ransom.mobi/d/es.7z
+
+
+Android client app
+------------------
+We created a simple app that can be used to query the service. For now, only
+the hash value is supported as a querying parameter. In future releases, we
+will allow the app to scan the (readable portions of the) device.
+
+    - Download: http://ransom.mobi/d/RansomwareDetector.apk
+
+                                                            -- June, 2015
