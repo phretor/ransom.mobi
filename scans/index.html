@@ -1,8 +1,3 @@
-<?php
-function transformFileNames($elem) {
-    return ucfirst(preg_replace('/\\.[^.\\s]{3,4}$/', '', $elem));
-}
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,26 +30,22 @@ function transformFileNames($elem) {
                 <h1>Ransomware reports <small>(last update: <span id="lastUpdate"></span>)</small></h1>
             </div>
         </div>
-        <?php
-        $csvFiles = array_map("transformFileNames", glob('*.csv'));
-        $index = array_search('Statistics', $csvFiles);
-        if ($index) {
-            $elem = $csvFiles[$index];
-
-            unset($csvFiles[$index]);
-            // Prepend item to array
-            array_unshift($csvFiles, $elem);
-        }
-        ?>
         <div class="row">
             <div class="col-xs-12">
                 <ul class="nav nav-pills" id="mainmenu">
-                    <?php
-                    foreach($csvFiles as $file) {
-                        $class = $file === $csvFiles[0] ? 'active' : '';
-                        echo "<li class=\"$class\"><a data-toggle='pill' href='#'>$file</a></li>";
-                    }
-                    ?>
+		    <li class="active"><a data-toggle="pill" href="#">Statistics</a></li>
+		    <li><a data-toggle="pill" href="#">Koler</a></li>
+		    <li><a data-toggle="pill" href="#">Locker</a></li>
+		    <li><a data-toggle="pill" href="#">Lockerpin</a></li>
+		    <li><a data-toggle="pill" href="#">Porndroid</a></li>
+		    <li><a data-toggle="pill" href="#">R1</a></li>
+		    <li><a data-toggle="pill" href="#">R2</a></li>
+		    <li><a data-toggle="pill" href="#">Reveton</a></li>
+		    <li><a data-toggle="pill" href="#">Scare</a></li>
+		    <li><a data-toggle="pill" href="#">Scarepackage</a></li>
+		    <li><a data-toggle="pill" href="#">Simplocker</a></li>
+		    <li><a data-toggle="pill" href="#">Slocker</a></li>
+		    <li><a data-toggle="pill" href="#">Svpeng</a></li>
                 </ul>
             </div>
         </div>
