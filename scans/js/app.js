@@ -31,12 +31,76 @@ $(function($) {
             
             if (c.status != 200) {
                 $("#error").empty().text("Error "+c.status).show()
+            } else {
+                // Load pie chart if the loaded page is statistics
+                if (text == "statistics") {
+                    // Prepare points
+                    points = []
+                    total = 0
+                    for (var prop in langs) {
+                        if (langs.hasOwnProperty(prop)) {
+                            if (prop == "null") {
+                                labelValue = "unknown"
+                            } else {
+                                labelValue = prop
+                            }
+
+                            points.push({
+                                label: labelValue,
+                                y: langs[prop]
+                            });
+                        }
+                    }
+
+                    // Count total samples
+                    $("#results tr td:nth-child(9)").each(function(index, elem) {
+                        total += parseInt($(elem).text());
+                    });
+
+                    console.log(total)
+
+                    $(points).each(function(index, elem) {
+                        total -= elem.y;
+                    });
+
+                    points.push({
+                        label: "no text detected",
+                        y: total
+                    })
+
+                    CanvasJS.addCultureInfo("it", {
+                        decimalSeparator: ",",
+                        digitGroupSeparator: "\'"
+                    });
+
+                    // Load pie chart
+                    var chart = new CanvasJS.Chart("chart-container", {
+                        theme: "theme1",
+                        culture: "it",
+                        title: {
+                            text: "Languages"
+                        },
+                        axisX: {
+                            title: "Pages"
+                        },
+                        animationEnabled: true,
+                        data : [{
+                            type: "pie",
+                            showInLegend: true,
+                            legendText: "{label}",
+                            toolTipContent: "{label}: {y} (#percent%)",
+                            dataPoints: points
+                        }]
+                    });
+
+                    chart.render();
+                }
             }
             
             // Hide "loading" label
             $("#loading").hide()
         });
-        
+
         /*
 
         // Perform AJAX request
