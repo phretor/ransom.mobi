@@ -151,6 +151,6 @@ $(function($) {
 	$("#mainmenu > li > a").first().click();
      
         $('#datatable').DataTables({
-            data: data
+            data: window.datatable_data
         });
 });
