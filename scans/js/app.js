@@ -149,4 +149,8 @@ $(function($) {
 
 	// load first pill data when the page is loaded
 	$("#mainmenu > li > a").first().click();
+     
+        $('#datatable').DataTables({
+            data: data
+        });
 });
