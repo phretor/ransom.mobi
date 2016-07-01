@@ -32,11 +32,17 @@ $(function($) {
             if (c.status != 200) {
                 $("#error").empty().text("Error "+c.status).show()
             } else {
+
+                initDatatableData();
+                var datatable = $('#results').DataTable({
+                    data: window.datatable_data
+                });
+
                 // Load pie chart if the loaded page is statistics
                 if (text == "statistics") {
                     // Prepare points
                     points = []
-                    total = 0
+                    // total = 0
                     for (var prop in langs) {
                         if (langs.hasOwnProperty(prop)) {
                             if (prop == "null") {
@@ -52,21 +58,27 @@ $(function($) {
                         }
                     }
 
-                    // Count total samples
-                    $("#results tr td:nth-child(9)").each(function(index, elem) {
-                        total += parseInt($(elem).text());
+                    total = 0;
+                    datatable.data().each(function(val) {
+                        total += parseInt(val[8]);
                     });
 
                     console.log(total)
 
+                    var unknown = total;
+
                     $(points).each(function(index, elem) {
-                        total -= elem.y;
+                        unknown -= elem.y;
                     });
 
-                    points.push({
-                        label: "no text detected",
-                        y: total
-                    })
+                    /*
+                     * Uncomment to include samples with no
+                     * threatening text inside the pie chart
+                     */
+                    // points.push({
+                    //     label: "no text detected",
+                    //     y: unknown
+                    // })
 
                     CanvasJS.addCultureInfo("it", {
                         decimalSeparator: ",",
@@ -95,7 +107,7 @@ $(function($) {
 
                     chart.render();
                 }
-                loadDatatableData();
+                
             }
             
             // Hide "loading" label
@@ -151,7 +163,4 @@ $(function($) {
 	// load first pill data when the page is loaded
 	$("#mainmenu > li > a").first().click();
      
-        $('#results').DataTable({
-            data: window.datatable_data
-        });
 });
