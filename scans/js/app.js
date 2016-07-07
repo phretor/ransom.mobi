@@ -38,7 +38,7 @@ $(function($) {
 //                    data: window.datatable_data
 //                });
 
-                var datatable = $('#results').DataTable({
+                window.datatable = $('#results').DataTable({
                     data: window.datatable_data,
                     columnDefs: [
                         {
@@ -59,8 +59,10 @@ $(function($) {
                                     result += '</div></div>';
                                 }
                                 return result;
-                            },
-                            initComplete: function () {
+                            }
+                        }
+                    ],
+                    initComplete: function () {
                                 this.api().columns([1, 2, 3, 6, 7, 8, 9, 11, 13]).every( function () {
                                     // Skip if family == statistics
                                     if (datatable.rows(0).data().length == 9)
@@ -77,14 +79,11 @@ $(function($) {
                                                 .search( val ? '^'+val+'$' : '', true, false )
                                                 .draw();
                                         } );
-                     
                                     column.data().unique().sort().each( function ( d, j ) {
                                         select.append( '<option value="'+d+'">'+d+'</option>' )
                                     } );
                                 } );
                             }
-                        }
-                    ]
                 });
 
                 // Load pie chart if the loaded page is statistics
