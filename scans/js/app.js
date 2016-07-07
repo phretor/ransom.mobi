@@ -43,15 +43,18 @@ $(function($) {
                         {
                             targets: 0,
                             render: function(data, type, row) {
-                                var isStatistics = !(data[0] instanceof Array);
+                                var isStatistics = !(data instanceof Array);
 
                                 if (isStatistics) {
-                                    var result = data[0];
+                                    var result = data;
                                 } else {
                                     var result = data[2]+'<div class="row"><div class="col-xs-12">';
                                     result += '<a class="btn btn-primary" href="https://www.virustotal.com/it/file/'+data[2]+'/analysis/"><i class="fa fa-cloud-download"></i> VT Report</a>';
                                     result += '</div></div><div class="row"><div class="col-xs-12">';
-                                    result += '<a class="btn btn-primary" href="http://detect.ransom.mobi/fetch-apk?family='+data[0]+'&hash='+data[1]+'""><i class="fa fa-download"></i> Analysis result</a>';
+                                    result += '<a class="btn btn-primary" href="http://detect.ransom.mobi/fetch-scan?hash='+data[1]+'""><i class="fa fa-info"></i> Analysis result</a>';
+                                    result += '</div></div>';
+                                    result += '</div></div><div class="row"><div class="col-xs-12">';
+                                    result += '<a class="btn btn-primary" href="http://detect.ransom.mobi/fetch-apk?family='+data[0]+'&hash='+data[2]+'""><i class="fa fa-download"></i> Analysis result</a>';
                                     result += '</div></div>';
                                 }
                                 return result;
@@ -59,7 +62,6 @@ $(function($) {
                         }
                     ]
                 });
-
                 // Load pie chart if the loaded page is statistics
                 if (text == "statistics") {
                     // Prepare points
