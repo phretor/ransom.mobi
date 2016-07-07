@@ -34,8 +34,24 @@ $(function($) {
             } else {
 
                 initDatatableData();
+//                var datatable = $('#results').DataTable({
+//                    data: window.datatable_data
+//                });
                 var datatable = $('#results').DataTable({
-                    data: window.datatable_data
+                    data: window.datatable_data,
+                    columnDefs: [
+                        {
+                            targets: 0,
+                            render: function(data, type, row) {
+                                var result = data[2]+'<div class="row"><div class="col-xs-12">';
+                                result += '<a class="btn btn-primary" href="https://www.virustotal.com/it/file/'+data[2]+'/analysis/"><i class="fa fa-cloud-download"></i> VT Report</a>';
+                                result += '</div></div><div class="row"><div class="col-xs-12">';
+                                result += '<a class="btn btn-primary" href="http://detect.ransom.mobi/fetch-apk?family='+data[0]+'&hash='+data[1]+'""><i class="fa fa-download"></i> Analysis result</a>';
+                                result += '</div></div>';
+                                return result;
+                            }
+                        }
+                    ]
                 });
 
                 // Load pie chart if the loaded page is statistics
