@@ -65,7 +65,7 @@ $(function($) {
                     initComplete: function () {
                                 this.api().columns([1, 2, 3, 6, 7, 8, 9, 11, 13]).every( function () {
                                     // Skip if family == statistics
-                                    if (datatable.rows(0).data().length == 9)
+                                    if (text == 'statistics')
                                         return;
                                     var column = this;
                                     var select = $('<select><option value=""></option></select>')
