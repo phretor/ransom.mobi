@@ -2,13 +2,14 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>Welcome to the first mobile ransomware detector.</title>
+        <title>HelDroid - Dissecting Android Apps for Ransomware Code</title>
     </head>
     <body>
 <pre>
+
                      .-----.
                    ,' -   - `.
-           _ _____/  <q> <p>  \_____ _
+           _ _____/  [p] [p]  \_____ _
           /_||   ||`-._____.-`||   ||-\
          / _||===||           ||===|| _\    I GOT AN ANDROID AND WHAT THE F**K
         |- _||===||===========||===||- _|    IT'S NOT EVEN HUMAN-SHAPED
@@ -29,6 +30,20 @@
              /|\___`\,|   |,/'___/|\
              |||`.\\ \\   // //,'|||
              \\\\_//_//   \\_\\_//// LGB/fsc
+
+HelDroid is a tool that we started developing in 2014 to deal with the analysis
+of Android ransomware. What it does in a nutshell is find clues in the
+disassembled Android bytecode that indicate the presence of code used to
+implement the typical features of ransomware. This includes:
+
+	* use of encryption routines without user intervention,
+	* locking the screen and make the device "unusable",
+	* displaying threatening messages on the screen to ask for a ransom,
+	* abuse of the Device Admin API for unattended locking or wiping.
+
+Code
+----
+Head over to https://github.com/necst/heldroid
 
 
 HTTP JSON API
@@ -72,7 +87,7 @@ We tested our system on the following datasets:
 
    * Raw data (APKs):
 
-      - AndRadar -> androcrawl-dataset.sha256.7z @ ://dl.dropboxusercontent.com/u/215810/ransom.mobi/androcrawl-dataset.sha256.7z
+      - AndRadar -> androcrawl-dataset.sha256.7z @ https://dl.dropboxusercontent.com/u/215810/ransom.mobi/androcrawl-dataset.sha256.7z
       - AndroTotal -> andrototal-dataset.sha256.7z @ https://dl.dropboxusercontent.com/u/215810/ransom.mobi/andrototal-dataset.sha256.7z
       - Ransomware 1 -> ransomware-1-training-dataset.7z @ https://dl.dropboxusercontent.com/u/215810/ransom.mobi/ransomware-1-training-dataset.7z
       - Ransomware 2 -> ransomware-2-testing-dataset.7z @ https://dl.dropboxusercontent.com/u/215810/ransom.mobi/ransomware-2-testing-dataset.7z
@@ -96,7 +111,7 @@ will allow the app to scan the (readable portions of the) device.
 
     - Download: http://ransom.mobi/d/RansomwareDetector.apk
 
-                                                            -- June, 2015
+                                                            -- Oct, 2016
 </pre>
     </body>
 </html>
